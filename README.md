@@ -1,105 +1,111 @@
-# Titanic Survival Prediction
+# Titanic Survival Prediction Web Application
 
-A machine learning project to predict passenger survival on the Titanic using classification models.
+A machine learning web application that predicts passenger survival on the Titanic using a Random Forest classifier.
 
-## Overview
+## 🚀 Features
 
-This project implements predictive models to determine which passengers survived the Titanic disaster based on their characteristics (age, sex, passenger class, etc.). It compares the performance of multiple machine learning algorithms on the famous Titanic dataset.
+- **Real-time Predictions**: Get instant survival predictions for any passenger
+- **Interactive UI**: User-friendly web interface
+- **Multiple Input Parameters**: Age, class, sex, fare, family size, embarkation port
+- **Probability Scores**: View survival probability and confidence levels
+- **REST API**: Backend API for integration
 
-## Dataset
+## 📊 Dataset & Model
 
-The project uses the **Titanic Dataset**, which contains information about 891 passengers including:
-- **PassengerId**: Unique identifier
-- **Pclass**: Passenger class (1st, 2nd, 3rd)
-- **Sex**: Gender (male/female)
-- **Age**: Age in years
-- **SibSp**: Number of siblings/spouses aboard
-- **Parch**: Number of parents/children aboard
-- **Fare**: Ticket fare
-- **Embarked**: Port of embarkation
-- **Cabin**: Cabin number (many missing)
-- **Survived**: Target variable (0 = No, 1 = Yes)
+- **Dataset**: 891 passengers from the famous Titanic disaster
+- **Model**: Random Forest Classifier (50 trees)
+- **Features**: 7 passenger attributes
+- **Accuracy**: ~82% on historical data
 
-## Data Processing
+## 🎯 Features Used
 
-1. **Missing Value Handling**:
-   - Age: Filled with median value
-   - Embarked: Filled with mode value
-   - Cabin: Dropped due to excessive missing values
+1. **Passenger Class** - 1st, 2nd, or 3rd class
+2. **Sex** - Gender (Female/Male)
+3. **Age** - Age in years
+4. **Siblings/Spouses (SibSp)** - Number of family members aboard
+5. **Parents/Children (Parch)** - Number of family members aboard
+6. **Fare** - Ticket price paid
+7. **Embarked** - Port of embarkation (Cherbourg, Queenstown, Southampton)
 
-2. **Feature Encoding**:
-   - Sex: Converted to binary (male=1, female=0)
-   - Embarked: Label encoded
+## 🛠️ Installation
 
-3. **Feature Selection**:
-   - Used features: Pclass, Sex, Age, SibSp, Parch, Fare, Embarked
+```bash
+pip install -r requirements.txt
+python app.py
+```
 
-## Models
+Visit `http://localhost:5000`
 
-The project implements and compares two classification models:
+## 📡 API Endpoints
 
-### 1. **Logistic Regression**
-- A linear classification model
-- Fast and interpretable
-- Good baseline for comparison
+### POST /api/predict
+Predict passenger survival.
 
-### 2. **Random Forest**
-- An ensemble learning method
-- Captures non-linear relationships
-- More robust to overfitting
+**Request:**
+```json
+{
+  "pclass": 1,
+  "sex": 0,
+  "age": 25,
+  "sibsp": 1,
+  "parch": 0,
+  "fare": 100,
+  "embarked": 2
+}
+```
 
-## Results
+**Response:**
+```json
+{
+  "success": true,
+  "result": "✅ Likely to Survive",
+  "survival_probability": 75.5,
+  "confidence": 75.5
+}
+```
 
-Models are evaluated using:
-- **Accuracy Score**: Overall correctness of predictions
-- **Confusion Matrix**: True positives, true negatives, false positives, false negatives
+### GET /api/info
+Get model information and features.
 
-The Random Forest model typically outperforms Logistic Regression on this dataset.
+## 🚢 Deploy to Vercel
 
-## Workflow
+1. Push to GitHub:
+```bash
+git add .
+git commit -m "Titanic web app"
+git push origin main
+```
 
-1. **Data Loading**: Import Titanic dataset from CSV
-2. **Exploratory Data Analysis**: Understand data distribution and missing values
-3. **Data Preprocessing**: Handle missing values and encode categorical features
-4. **Train-Test Split**: Split data (80% train, 20% test)
-5. **Model Training**: Fit both Logistic Regression and Random Forest models
-6. **Evaluation**: Compare model performance using accuracy and confusion matrices
-7. **Visualization**: Display results through confusion matrix plots
+2. Connect to Vercel:
+   - Go to https://vercel.com
+   - Click "Add New Project"
+   - Select your GitHub repository
+   - Click "Deploy"
 
-## Requirements
+Your app will be live at `https://your-project-name.vercel.app`
 
-- Python 3.x
-- pandas
-- scikit-learn
-- matplotlib
-
-## Usage
-
-1. Upload the Titanic dataset (`Titanic-Dataset.csv`)
-2. Run the notebook cells sequentially
-3. View model performance metrics and visualizations
-
-## Project Structure
+## 📁 Project Structure
 
 ```
 Titanic_Survival_Prediction/
-├── Titanic_Survival_Prediction.ipynb  # Main project notebook
-└── README.md                          # Project documentation
+├── app.py                    # Flask application
+├── requirements.txt          # Python dependencies
+├── vercel.json              # Vercel configuration
+├── runtime.txt              # Python version
+├── Titanic_Survival_Prediction.ipynb  # Original notebook
+├── templates/
+│   └── index.html           # Frontend
+└── static/
+    ├── style.css            # Styling
+    └── script.js            # Frontend logic
 ```
 
-## Future Enhancements
+## 🔧 Technologies
 
-- Feature engineering (creating new features like family size, title extraction)
-- Hyperparameter tuning
-- Additional models (SVM, Gradient Boosting, Neural Networks)
-- Cross-validation for robust evaluation
-- Feature importance analysis
-- Deployment as a web application
+- **Backend**: Flask, Python, scikit-learn
+- **Frontend**: HTML5, CSS3, JavaScript
+- **Deployment**: Vercel
 
-## Author
+## 📝 Author
 
-**Khaja Masthan Shaik** (rexter001)
-
-## License
-
-This project is open source and available under the MIT License.
+Khaja Masthan Shaik (rexter001)
